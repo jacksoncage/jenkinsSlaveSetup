@@ -1,5 +1,11 @@
 # defaults for jenkins continuous integration server
 
+JENKINS_ARGS="-jnlpUrl http://test.lnc.jp:8080/computer/wock/slave-agent.jnlp"
+# jenkins home location
+JENKINS_HOME=/opt/jenkins-slave
+# location of the jenkins war file
+JENKINS_WAR=$JENKINS_HOME/slave.jar 
+
 # pulled in from the init script; makes things easier.
 NAME=jenkins
 
@@ -50,4 +56,3 @@ AJP_PORT=-1
 # --argumentsRealm.passwd.$ADMIN_USER=[password]
 # --argumentsRealm.$ADMIN_USER=admin
 # --webroot=~/.jenkins/war
-JENKINS_ARGS="-jnlpUrl http://test.lnc.jp:8080/computer/kamikaze/slave-agent.jnlp"
