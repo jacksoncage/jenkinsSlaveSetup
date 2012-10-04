@@ -6,4 +6,4 @@ chown root:root /etc/init.d/jenkins-slave
 sudo chown root:root /etc/init.d/jenkins-slave 
 mkdir /opt/jenkins-slave/
 cd /opt/jenkins-slave/
-curl -O https://test.viaplay.tv/computer/debian_slave_node_1/slave-agent.jnlp
+curl -O https://test.viaplay.tv/computer/SLAVENAME/slave-agent.jnlp
