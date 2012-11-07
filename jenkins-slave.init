@@ -13,25 +13,33 @@
 # Description:       Controls the jenkins continuous integration engine.
 ### END INIT INFO
 
+
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
+
 
 DESC="Jenkins Continuous Integration Server"
 NAME=jenkins-slave
 SCRIPTNAME=/etc/init.d/$NAME
 
+
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
+
 
 #DAEMON=$JENKINS_SH
 DAEMON=/usr/bin/daemon
 DAEMON_ARGS="--name=$NAME --inherit --env=JENKINS_HOME=$JENKINS_HOME --output=$JENKINS_LOG --pidfile=$PIDFILE" 
 
+
 SU=/bin/su
+
 
 # Exit if the package is not installed
 [ -x "$DAEMON" ] || exit 0
 
+
 # Exit if not supposed to run standalone
 [ "$RUN_STANDALONE" = "false" ] && exit 0
+
 
 # load environments
 if [ -r /etc/default/locale ]; then
@@ -42,12 +50,15 @@ elif [ -r /etc/environment ]; then
   export LANG LANGUAGE
 fi
 
+
 # Load the VERBOSE setting and other rcS variables
 . /lib/init/vars.sh
+
 
 # Define LSB log_* functions.
 # Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
 . /lib/lsb/init-functions
+
 
 # Make sure we run as root, since setting the max open files through
 # ulimit requires root access
@@ -57,10 +68,13 @@ if [ `id -u` -ne 0 ]; then
 fi
 
 
+
+
 check_tcp_port() {
     local service=$1
     local assigned=$2
     local default=$3
+
 
     if [ -n "$assigned" ]; then 
         port=$assigned
@@ -77,6 +91,7 @@ check_tcp_port() {
     fi
 }
 
+
 #
 # Function that starts the daemon/service
 #
@@ -91,6 +106,7 @@ do_start()
     #   2 if daemon could not be started
     $DAEMON $DAEMON_ARGS --running && return 1
 
+
     # If the var MAXOPENFILES is enabled in /etc/default/jenkins then set the max open files to the 
     # proper value
     if [ -n "$MAXOPENFILES" ]; then
@@ -104,6 +120,8 @@ do_start()
 }
 
 
+
+
 #
 # Verify that all jenkins processes have been shutdown
 # and if not, then do killall for them
@@ -113,6 +131,7 @@ get_running()
     return `ps -U $JENKINS_USER --no-headers -f | egrep -e '(java|daemon)' | grep -c . `
 }
 
+
 force_stop() 
 {
     get_running
@@ -121,11 +140,14 @@ force_stop()
     fi
 }
 
+
 # Get the status of the daemon process
 get_daemon_status()
 {
     $DAEMON $DAEMON_ARGS --running || return 1
 }
+
+
 
 
 #
@@ -156,10 +178,12 @@ do_stop()
 	    ;;
     esac
 
+
     # Many daemons don't delete their pidfiles when they exit.
     rm -f $PIDFILE
     return 0
 }
+
 
 case "$1" in
   start)
@@ -215,6 +239,7 @@ case "$1" in
 		      echo
 		  fi
 
+
 	      else 
 		  echo "$procs instances of jenkins are running at the moment"
 		  echo "but the pidfile $PIDFILE is missing"
@@ -227,5 +252,6 @@ case "$1" in
     exit 3
     ;;
 esac
+
 
 exit 0

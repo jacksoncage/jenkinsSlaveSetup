@@ -1,6 +1,6 @@
 # defaults for jenkins continuous integration server
 
-JENKINS_ARGS="-jnlpUrl https://test.viaplay.tv/computer/SLAVENAME/slave-agent.jnlp"
+JENKINS_ARGS="-jnlpUrl https://test.viaplay.tv/jenkins/computer/SLAVENAME/slave-agent.jnlp"
 # jenkins home location
 JENKINS_HOME=/opt/jenkins-slave
 # location of the jenkins war file
