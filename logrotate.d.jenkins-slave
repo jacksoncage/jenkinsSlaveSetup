@@ -1,7 +1,0 @@
-/var/log/jenkins/jenkins-slave.log {
-create
-weekly
-create 0664 root root
-rotate 4
-compress
-}
